@@ -216,3 +216,27 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+
+# --- AWS / credentials (never commit these) ---
+.aws/
+*.pem
+*.pfx
+credentials
+
+# --- AWS SAM / CDK / Terraform build artifacts ---
+.aws-sam/
+cdk.out/
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+# --- Lambda packaging ---
+*.zip
+layer/
+package/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
