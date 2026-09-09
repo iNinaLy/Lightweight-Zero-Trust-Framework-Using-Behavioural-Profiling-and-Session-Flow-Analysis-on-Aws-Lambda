@@ -1,0 +1,13 @@
+{
+  "LogBucketName": "REPLACE-WITH-GLOBALLY-UNIQUE-BUCKET",
+  "StageName": "dev",
+  "RiskWeightsJson": "{\"unknown_ip\":50,\"off_hours\":25,\"unknown_user_agent\":15,\"unusual_sensitive_action\":30}",
+  "DenyThreshold": "70",
+  "SensitiveActionsJson": "[\"iam:CreateUser\"]",
+  "IdentityMapJson": "{\"REPLACE-JWT-SUBJECT\":\"arn:aws:iam::REPLACE-ACCOUNT:user/REPLACE-USER\"}",
+  "RouteActionMapJson": "{\"GET /protected\":\"s3:ListBuckets\"}",
+  "JwtIssuer": "https://REPLACE-ISSUER",
+  "JwtAudience": "REPLACE-AUDIENCE",
+  "JwtJwksUrl": "https://REPLACE-ISSUER/REPLACE-JWKS-PATH",
+  "CaptureDataEvents": "true"
+}

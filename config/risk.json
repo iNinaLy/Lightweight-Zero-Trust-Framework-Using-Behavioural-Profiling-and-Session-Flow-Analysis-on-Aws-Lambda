@@ -1,0 +1,11 @@
+{
+  "weights": {
+    "unknown_ip": 50,
+    "off_hours": 25,
+    "unknown_user_agent": 15,
+    "unusual_sensitive_action": 30
+  },
+  "deny_threshold": 70,
+  "deny_comparison": "gte",
+  "sensitive_actions": ["iam:CreateUser"]
+}

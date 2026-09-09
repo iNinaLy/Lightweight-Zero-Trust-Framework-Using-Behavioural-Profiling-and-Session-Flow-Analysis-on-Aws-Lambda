@@ -239,8 +239,7 @@ package/
 
 # --- OS ---
 .DS_Store
-<<<<<<< HEAD
 Thumbs.db
-=======
-Thumbs.db
->>>>>>> f3c2f5ec3026e04dcafdeb9cbfdf3f264c14988c
+# Local LZTA deployment inputs
+config/deployment.local.json
+reports/live-*.json

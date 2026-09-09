@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserBehaviorProfiles application item (DynamoDB sets represented as arrays)",
+  "type": "object",
+  "required": ["userId", "knownIPs", "userAgents", "hourHistogram", "actionCounts"],
+  "properties": {
+    "userId": {"type": "string", "pattern": "^arn:"},
+    "knownIPs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "userAgents": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "hourHistogram": {
+      "type": "object", "minProperties": 1,
+      "propertyNames": {"pattern": "^([0-9]|1[0-9]|2[0-3])$"},
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "actionCounts": {
+      "type": "object", "minProperties": 1,
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    }
+  },
+  "additionalProperties": false,
+  "$comment": "Infrastructure also stores receipt-only items {userId: event#<CloudTrail eventID>} in this table for transactional deduplication. This schema describes complete user profiles only."
+}

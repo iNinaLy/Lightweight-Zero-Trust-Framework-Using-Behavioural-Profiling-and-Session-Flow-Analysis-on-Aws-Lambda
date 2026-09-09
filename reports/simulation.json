@@ -1,0 +1,90 @@
+{
+  "kind": "synthetic_local_rule_evaluation",
+  "config": {
+    "weights": {
+      "unknown_ip": 50,
+      "off_hours": 25,
+      "unknown_user_agent": 15,
+      "unusual_sensitive_action": 30
+    },
+    "deny_threshold": 70,
+    "deny_comparison": "gte",
+    "sensitive_actions": [
+      "iam:CreateUser"
+    ]
+  },
+  "note": "No AWS latency, cost, original dataset, or measured paper accuracy reproduced.",
+  "scenarios": [
+    {
+      "scenario": "normal",
+      "requests": 10,
+      "score": 0.0,
+      "anomalies": [],
+      "allowed": 10,
+      "denied": 0
+    },
+    {
+      "scenario": "foreign_ip",
+      "requests": 10,
+      "score": 50.0,
+      "anomalies": [
+        "unknown_ip"
+      ],
+      "allowed": 10,
+      "denied": 0
+    },
+    {
+      "scenario": "off_hours",
+      "requests": 10,
+      "score": 25.0,
+      "anomalies": [
+        "off_hours"
+      ],
+      "allowed": 10,
+      "denied": 0
+    },
+    {
+      "scenario": "first_sensitive_action",
+      "requests": 10,
+      "score": 30.0,
+      "anomalies": [
+        "unusual_sensitive_action"
+      ],
+      "allowed": 10,
+      "denied": 0
+    },
+    {
+      "scenario": "unknown_device",
+      "requests": 10,
+      "score": 15.0,
+      "anomalies": [
+        "unknown_user_agent"
+      ],
+      "allowed": 10,
+      "denied": 0
+    },
+    {
+      "scenario": "foreign_ip_and_off_hours",
+      "requests": 10,
+      "score": 75.0,
+      "anomalies": [
+        "unknown_ip",
+        "off_hours"
+      ],
+      "allowed": 0,
+      "denied": 10
+    },
+    {
+      "scenario": "off_hours_sensitive_action_unknown_device",
+      "requests": 10,
+      "score": 70.0,
+      "anomalies": [
+        "off_hours",
+        "unknown_user_agent",
+        "unusual_sensitive_action"
+      ],
+      "allowed": 0,
+      "denied": 10
+    }
+  ]
+}
