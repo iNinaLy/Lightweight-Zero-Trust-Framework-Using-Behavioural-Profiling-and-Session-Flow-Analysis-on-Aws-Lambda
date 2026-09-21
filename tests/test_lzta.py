@@ -18,9 +18,7 @@ from lzta.profiles import observation, ProfileStore
 from lzta.scoring import Decision, Request, Rules, evaluate
 
 USER = "arn:aws:iam::123456789012:user/alice"
-CONFIG = {"weights": {"unknown_ip": 50, "off_hours": 25, "unknown_user_agent": 15,
-                      "unusual_sensitive_action": 30},
-          "deny_threshold": 70, "deny_comparison": "gte", "sensitive_actions": ["iam:CreateUser"]}
+CONFIG = {"decision_policy": "deny_on_any_anomaly", "sensitive_actions": ["iam:CreateUser"]}
 PROFILE = {"userId": USER, "knownIPs": {"192.0.2.1"}, "userAgents": {"known-agent"},
            "hourHistogram": {"9": Decimal(4)}, "actionCounts": {"s3:ListBuckets": Decimal(4)}}
 
@@ -51,25 +49,31 @@ class RuleTests(unittest.TestCase):
         self.rules = Rules.from_dict(CONFIG)
 
     def test_normal_and_each_single_anomaly(self):
-        for changes, score, signal in [({}, 0, None), ({"source_ip": "198.51.100.1"}, 50, "unknown_ip"),
-                ({"user_agent": "new"}, 15, "unknown_user_agent"),
-                ({"time": datetime(2026, 1, 1, 23, tzinfo=timezone.utc)}, 25, "off_hours"),
-                ({"action": "iam:CreateUser"}, 30, "unusual_sensitive_action")]:
+        for changes, signal in [({}, None), ({"source_ip": "198.51.100.1"}, "unknown_ip"),
+                ({"user_agent": "new"}, "unknown_user_agent"),
+                ({"time": datetime(2026, 1, 1, 23, tzinfo=timezone.utc)}, "off_hours"),
+                ({"action": "iam:CreateUser"}, "unusual_sensitive_action")]:
             with self.subTest(signal=signal):
                 result = evaluate(request(**changes), PROFILE, self.rules)
-                self.assertEqual(result.score, score)
-                self.assertEqual(result.verdict, "Allow")
+                self.assertEqual(result.verdict, "Allow" if signal is None else "Deny")
                 self.assertEqual(result.anomalies, () if signal is None else (signal,))
+                self.assertFalse(hasattr(result, "score"))
 
-    def test_exact_threshold_and_combinations(self):
-        # 25 + 30 + 15 = 70, including no unknown-IP anomaly.
-        result = evaluate(request(user_agent="new", action="iam:CreateUser",
-                          time=datetime(2026, 1, 1, 23, tzinfo=timezone.utc)), PROFILE, self.rules)
-        self.assertEqual((result.score, result.verdict), (70, "Deny"))
-        result = evaluate(request(source_ip="198.51.100.1", user_agent="new"), PROFILE, self.rules)
-        self.assertEqual((result.score, result.verdict), (65, "Allow"))
-        result = evaluate(request(source_ip="198.51.100.1", action="iam:CreateUser"), PROFILE, self.rules)
-        self.assertEqual((result.score, result.verdict), (80, "Deny"))
+    def test_all_anomaly_combinations(self):
+        from itertools import product
+        for ip, hour, agent, action in product((False, True), repeat=4):
+            with self.subTest(ip=ip, hour=hour, agent=agent, action=action):
+                result = evaluate(request(
+                    source_ip="198.51.100.1" if ip else "192.0.2.1",
+                    time=datetime(2026, 1, 1, 23 if hour else 9, tzinfo=timezone.utc),
+                    user_agent="new" if agent else "known-agent",
+                    action="iam:CreateUser" if action else "s3:ListBuckets"), PROFILE, self.rules)
+                self.assertEqual(result.verdict, "Deny" if any((ip, hour, agent, action)) else "Allow")
+
+    def test_known_sensitive_and_new_nonsensitive_actions_allow(self):
+        profile = {**PROFILE, "actionCounts": {**PROFILE["actionCounts"], "iam:CreateUser": 1}}
+        self.assertEqual(evaluate(request(action="iam:CreateUser"), profile, self.rules).verdict, "Allow")
+        self.assertEqual(evaluate(request(action="s3:GetObject"), PROFILE, self.rules).verdict, "Allow")
 
     def test_missing_or_corrupt_profile_denied(self):
         for item in (None, {}, {**PROFILE, "hourHistogram": {}}, {**PROFILE, "actionCounts": {"x": -1}},
@@ -81,10 +85,9 @@ class RuleTests(unittest.TestCase):
         self.assertIn("off_hours", result.anomalies)
 
     def test_invalid_configuration_rejected(self):
-        for weight in (None, True, -1, "NaN", "Infinity"):
-            data = copy.deepcopy(CONFIG)
-            data["weights"]["unknown_ip"] = weight
-            with self.assertRaises(ValueError):
+        for data in ({}, {**CONFIG, "weights": {}}, {**CONFIG, "deny_threshold": 70},
+                     {**CONFIG, "decision_policy": "weighted"}, {**CONFIG, "sensitive_actions": None}):
+            with self.subTest(data=data), self.assertRaises(ValueError):
                 Rules.from_dict(data)
 
 
@@ -108,7 +111,8 @@ class AuthorizerTests(unittest.TestCase):
         result, log = self.run_auth(api_event())
         self.assertEqual(result["policyDocument"]["Statement"][0]["Effect"], "Allow")
         self.assertEqual(result["policyDocument"]["Statement"][0]["Resource"], api_event()["methodArn"])
-        self.assertEqual(log["riskScore"], 0)
+        self.assertEqual(log["decisionPolicy"], "deny_on_any_anomaly")
+        self.assertNotIn("riskScore", log)
 
     def test_spoofed_context_headers_ignored(self):
         event = api_event()
@@ -116,7 +120,7 @@ class AuthorizerTests(unittest.TestCase):
         event["requestContext"]["identity"]["sourceIp"] = "198.51.100.1"
         event["requestContext"]["requestTimeEpoch"] += 14 * 3600 * 1000
         _, log = self.run_auth(event)
-        self.assertEqual((log["riskScore"], log["verdict"]), (75, "Deny"))
+        self.assertEqual(log["verdict"], "Deny")
         self.store.get.assert_called_once_with(USER)
 
     def test_invalid_token_denies_without_profile_read(self):

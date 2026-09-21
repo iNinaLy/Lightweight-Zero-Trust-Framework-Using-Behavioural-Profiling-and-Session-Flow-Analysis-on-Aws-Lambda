@@ -1,4 +1,4 @@
-﻿AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Single-authorizer LZTA/BBAD reproduction - CloudTrail baselines and JWT-authenticated API enforcement.
 
@@ -13,16 +13,6 @@ Parameters:
     Type: String
     Default: dev
     AllowedPattern: '[a-zA-Z0-9]+'
-  RiskWeightsJson:
-    Type: String
-    Default: '{"unknown_ip":50,"off_hours":25,"unknown_user_agent":15,"unusual_sensitive_action":30}'
-    MinLength: 2
-    Description: User-supplied anomaly weights, configurable for later experiments.
-  DenyThreshold:
-    Type: Number
-    Default: 70
-    MinValue: 0
-    Description: User-supplied single-stage rule - deny scores greater than or equal to this value.
   SensitiveActionsJson:
     Type: String
     MinLength: 2
@@ -230,13 +220,11 @@ Resources:
   ZeroTrustAuthorizer:
     Type: AWS::Serverless::Function
     Properties:
-      Description: zero-trust-authorizer - signed JWT verification and single-stage behavioral risk decision.
+      Description: zero-trust-authorizer - signed JWT verification and single-stage binary behavioral decision.
       Handler: lzta.authorizer.lambda_handler
       Environment:
         Variables:
           PROFILES_TABLE: !Ref UserBehaviorProfiles
-          RISK_WEIGHTS_JSON: !Ref RiskWeightsJson
-          DENY_THRESHOLD: !Ref DenyThreshold
           SENSITIVE_ACTIONS_JSON: !Ref SensitiveActionsJson
           IDENTITY_MAP_JSON: !Ref IdentityMapJson
           ROUTE_ACTION_MAP_JSON: !Ref RouteActionMapJson
@@ -304,7 +292,7 @@ Resources:
     Properties:
       Name: !Sub '${AWS::StackName}/denied-requests'
       LogGroupNames: [!Ref AuthorizerLogGroup]
-      QueryString: 'fields @timestamp, user, ip, riskScore, anomalies | filter eventType = "access_decision" and verdict = "Deny" | sort @timestamp desc | limit 100'
+      QueryString: 'fields @timestamp, user, ip, decisionPolicy, anomalies | filter eventType = "access_decision" and verdict = "Deny" | sort @timestamp desc | limit 100'
   LatencyQuery:
     Type: AWS::Logs::QueryDefinition
     Properties:
@@ -316,7 +304,7 @@ Resources:
     Properties:
       DashboardBody: !Sub |
         {"widgets":[
-          {"type":"log","x":0,"y":0,"width":12,"height":6,"properties":{"region":"${AWS::Region}","title":"Denied requests","view":"table","query":"SOURCE '${AuthorizerLogGroup}' | fields @timestamp, user, ip, riskScore, anomalies | filter eventType = 'access_decision' and verdict = 'Deny' | sort @timestamp desc | limit 100"}},
+          {"type":"log","x":0,"y":0,"width":12,"height":6,"properties":{"region":"${AWS::Region}","title":"Denied requests","view":"table","query":"SOURCE '${AuthorizerLogGroup}' | fields @timestamp, user, ip, decisionPolicy, anomalies | filter eventType = 'access_decision' and verdict = 'Deny' | sort @timestamp desc | limit 100"}},
           {"type":"log","x":12,"y":0,"width":12,"height":6,"properties":{"region":"${AWS::Region}","title":"Decisions over time","view":"timeSeries","query":"SOURCE '${AuthorizerLogGroup}' | filter eventType = 'access_decision' | stats count(*) by bin(5m), verdict"}},
           {"type":"log","x":0,"y":6,"width":12,"height":6,"properties":{"region":"${AWS::Region}","title":"Users with repeated denials","view":"table","query":"SOURCE '${AuthorizerLogGroup}' | filter eventType = 'access_decision' and verdict = 'Deny' | stats count(*) as denied by user | sort denied desc"}},
           {"type":"log","x":12,"y":6,"width":12,"height":6,"properties":{"region":"${AWS::Region}","title":"Authorizer latency and cold starts","view":"table","query":"SOURCE '${AuthorizerLogGroup}' | filter @type = 'REPORT' | stats count(*) as requests, avg(@duration) as avgMs, max(@duration) as maxMs, max(@initDuration) as maxInitMs"}}

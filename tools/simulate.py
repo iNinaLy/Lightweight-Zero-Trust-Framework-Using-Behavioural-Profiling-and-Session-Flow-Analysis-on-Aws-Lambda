@@ -33,7 +33,7 @@ def main():
     results = []
     for name, request in cases.items():
         outcomes = [evaluate(request, baseline, rules) for _ in range(10)]
-        results.append({"scenario": name, "requests": len(outcomes), "score": float(outcomes[0].score),
+        results.append({"scenario": name, "requests": len(outcomes),
                         "anomalies": outcomes[0].anomalies, "allowed": sum(x.verdict == "Allow" for x in outcomes),
                         "denied": sum(x.verdict == "Deny" for x in outcomes)})
     report = {"kind": "synthetic_local_rule_evaluation", "config": json.loads(args.config.read_text()),

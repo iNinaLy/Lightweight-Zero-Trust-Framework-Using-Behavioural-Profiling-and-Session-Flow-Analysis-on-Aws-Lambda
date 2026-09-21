@@ -1,4 +1,14 @@
-﻿# Infrastructure and operational contracts
+# Infrastructure and operational contracts
+
+## Current baseline and planned FYP extension
+
+This document describes the currently implemented single-stage infrastructure. The project sequence is to test this baseline first, then implement the two-stage FYP extension, and finally compare both systems. The extension remains planned; its [original requirements](original_two_stage_context.md) are preserved.
+
+For the later extension, Stage 1 will evaluate `BehaviorProfiles`; escalated requests will reach Stage 2, which evaluates `SessionFlow`. Offline Pipeline 1, Offline Pipeline 2, and the Online Pipeline must remain decoupled. These are future implementation requirements, not resources already present in the current template. Confirm the telemetry mechanism and current scoring/session parameters when that work begins.
+
+The current strict binary rule is a paper-inspired experimental baseline, not a verified reproduction of the paper's unspecified scoring algorithm. Preserve its code/configuration and test results before implementing the extension so the comparison is reproducible.
+
+## Currently provisioned resources
 
 The SAM template provisions one multi-Region CloudTrail trail, encrypted/private S3 log storage, one `UserBehaviorProfiles` DynamoDB table, an offline baselining Lambda, one online JWT Lambda Authorizer, a protected mock Lambda/API, a failed-ingestion queue, log groups, Logs Insights queries, and a CloudWatch dashboard. IAM scopes the baseliner to the log prefix and profile writes; the authorizer can only read profiles. Neither function has permission to invoke an extra authorizer.
 
@@ -22,13 +32,13 @@ The retained receipts grow with event count. Profiles also accumulate features a
 
 A REQUEST authorizer checks signed RS256 JWTs using a configured HTTPS JWKS URL, issuer, audience, expiration, issued-at time, and subject. JWT `sub` is mapped explicitly to the CloudTrail principal ARN. JWKS data is cached; a key fetch may add network latency. No token or full event is logged. Cognito-style access tokens without the required `aud` claim need a provider-specific verifier; do not disable audience checks to make them pass.
 
-The source IP and request time come from API Gateway request context. The action comes from a deployment-controlled method/resource mapping, not a client header. User-Agent is a spoofable behavioral signal, not device attestation. The final IAM policy is scoped to the current method ARN and authorizer caching is disabled. Missing identity/profile/action, malformed configuration, invalid JWTs, and backend failures deny. There is no low-score override for authentication failures.
+The source IP and request time come from API Gateway request context. The action comes from a deployment-controlled method/resource mapping, not a client header. User-Agent is a spoofable behavioral signal, not device attestation. The final IAM policy is scoped to the current method ARN and authorizer caching is disabled. Missing identity/profile/action, malformed configuration, invalid JWTs, and backend failures deny. Authentication failures cannot be overridden by behavioral checks.
 
-User-supplied defaults are 50/25/30/15 points and a deny threshold of 70 (inclusive). There is no escalation band. `config/risk.json` drives local simulations; SAM parameters drive Lambda settings. Change both consistently for experiments.
+The policy is `deny_on_any_anomaly`: any detected anomaly denies; otherwise it allows. There are no risk scores, weights, thresholds, or escalation. `config/risk.json` drives local simulation; `SensitiveActionsJson` supplies the corresponding deployed list. Logs include `decisionPolicy`, anomalies, and verdict, without `riskScore`. Remove obsolete `RiskWeightsJson` and `DenyThreshold` entries from local parameter files; the deployment helper rejects them. Existing AWS stacks require redeployment.
 
 ## Deployment and lifecycle
 
-`tools/deploy.py` reads the local JSON parameter file, validates scoring settings, runs SAM lint/build with a Linux container, and invokes a changeset-confirmed deploy. Use separate development AWS resources. The template does not create or replace a Region-wide API Gateway logging role: analytics come directly from Lambda decision logs, as in the paper.
+`tools/deploy.py` reads the local JSON parameter file, validates binary-policy settings, runs SAM lint/build with a Linux container, and invokes a changeset-confirmed deploy. Use separate development AWS resources. The template does not create or replace a Region-wide API Gateway logging role: analytics come directly from Lambda decision logs, as in the paper.
 
 Tables, S3 logs, and Lambda log groups are retained on stack deletion. Retained data can continue to incur charges. The SQS queue is not retained. No automatic cleanup or deployment was performed by this coding task. Data events, S3, DynamoDB transactions/receipts, CloudWatch queries/dashboard, and network requests may incur charges; the paper's $0 observation is not a service guarantee.
 

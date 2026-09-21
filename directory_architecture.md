@@ -1,4 +1,4 @@
-﻿# Directory architecture
+# Directory architecture
 
 ```text
 lzta-framework/
@@ -12,13 +12,13 @@ lzta-framework/
 │       ├── __init__.py
 │       ├── baseline.py                 # Offline gzip CloudTrail ingestion
 │       ├── profiles.py                 # Feature extraction and transactional profile updates
-│       ├── scoring.py                  # Pure, configurable rule engine
+│       ├── scoring.py                  # Strict binary anomaly checks
 │       ├── identity.py                 # RS256 JWT verification
 │       ├── authorizer.py               # Single online Allow/Deny authorizer
 │       ├── logging.py                  # Structured JSON decisions
 │       └── target.py                   # Protected demonstration endpoint
 ├── config/
-│   ├── risk.json                       # User-supplied weights/threshold; example sensitive action
+│   ├── risk.json                       # Binary policy and example sensitive action
 │   └── deployment.example.json         # Explicit identity/provider/account placeholders
 ├── database/
 │   └── user_behavior_profiles.schema.json
@@ -33,10 +33,12 @@ lzta-framework/
 ├── docs/
 │   ├── infrastructure.md
 │   ├── paper_replication.md
-│   └── original_two_stage_context.md   # Historical context, superseded by current request
+│   └── original_two_stage_context.md   # Preserved requirements for the planned two-stage FYP extension
 ├── requirements.txt                    # Runtime dependency entry point
 ├── requirements-dev.txt                # Runtime + test/lint tooling
 └── README.md
 ```
 
-The former empty Stage 1/Stage 2 and SessionFlow placeholders were removed. The paper's single `UserBehaviorProfiles` table replaces the earlier `BehaviorProfiles`/`SessionFlow` split. This structure follows the user's explicit request to replicate the paper without escalation.
+This directory structure describes the current baseline only. The empty Stage 1/Stage 2 and SessionFlow placeholders were removed during baseline implementation; the two-stage design itself remains planned. Test the baseline using `UserBehaviorProfiles` first, then implement the extension with `BehaviorProfiles`, `SessionFlow`, and conditional escalation. See `docs/original_two_stage_context.md` for its preserved requirements.
+
+Current policy: any anomaly denies. This is a strict binary experimental baseline inspired by the paper, not a verified copy of its unspecified scoring algorithm.

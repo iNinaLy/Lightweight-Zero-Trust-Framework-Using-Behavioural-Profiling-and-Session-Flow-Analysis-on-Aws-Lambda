@@ -16,4 +16,4 @@ capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 fail_on_empty_changeset = false
 # Run the first deployment with --guided to supply region and required parameters.
-# User-approved weights and threshold are defaults in template.yaml.
+# The strict binary baseline has no weight or threshold parameters.

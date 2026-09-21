@@ -1,6 +1,16 @@
-# Historical context — superseded by the user's single-authorizer paper replication request
+# Planned FYP extension: original two-stage requirements
 
-This file is archived for reference, not the current implementation specification.
+The two-stage design below remains the planned FYP extension. It is deferred until the current single-stage baseline has been tested, not abandoned or replaced as the final project objective. The original requirements below are preserved.
+
+## Implementation sequence
+
+1. Test the current paper-inspired single-stage baseline and record its behavior and limitations.
+2. Preserve a reproducible baseline version, then implement the two-stage extension described below.
+3. Compare both implementations using the same labeled requests, baseline data, and evaluation conditions.
+
+The current code and SAM template implement only the baseline: `UserBehaviorProfiles` and one authorizer with a strict any-anomaly-denies policy. They do not yet implement the extension's `BehaviorProfiles`, `SessionFlow`, or escalation logic. The binary policy is an explicit experimental choice, not a verified copy of the paper's scoring algorithm.
+
+Before implementing the extension, revisit the telemetry source for application requests and confirm the then-current weights, thresholds, and session parameters. The original CloudTrail pipeline descriptions below are retained as requirements context, not proof that CloudTrail supplies custom API Gateway endpoint requests.
 
 # Setup, deployment, and testing instructions
 # ROLE & CONTEXT SETUP: Lightweight Zero Trust Access (LZTA) Framework

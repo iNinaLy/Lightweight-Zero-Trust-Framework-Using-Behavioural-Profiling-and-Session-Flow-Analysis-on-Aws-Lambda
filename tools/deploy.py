@@ -23,14 +23,16 @@ def main():
         parser.error("Parameter file must be a string-to-string JSON object")
     if "REPLACE" in json.dumps(values):
         parser.error("Replace all deployment placeholders first")
-    required = {"LogBucketName", "RiskWeightsJson", "DenyThreshold", "SensitiveActionsJson", "IdentityMapJson",
+    required = {"LogBucketName", "SensitiveActionsJson", "IdentityMapJson",
                 "RouteActionMapJson", "JwtIssuer", "JwtAudience", "JwtJwksUrl", "CaptureDataEvents"}
     if not required <= values.keys():
         parser.error("Missing required parameters: " + ", ".join(sorted(required - values.keys())))
-    Rules.from_dict({"weights": json.loads(values["RiskWeightsJson"]), "deny_threshold": values["DenyThreshold"],
-                     "deny_comparison": "gte", "sensitive_actions": json.loads(values["SensitiveActionsJson"])})
+    if {"RiskWeightsJson", "DenyThreshold"} & values.keys():
+        parser.error("Remove RiskWeightsJson and DenyThreshold: this baseline has no scores")
+    Rules.from_dict({"decision_policy": "deny_on_any_anomaly",
+                     "sensitive_actions": json.loads(values["SensitiveActionsJson"])})
     if args.validate_only:
-        print("Deployment scoring parameters validated; no AWS action performed.")
+        print("Deployment binary-policy parameters validated; no AWS action performed.")
         return
     sam = shutil.which("sam")
     if not sam:

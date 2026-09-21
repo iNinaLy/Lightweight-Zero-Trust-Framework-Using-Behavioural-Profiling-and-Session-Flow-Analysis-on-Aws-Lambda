@@ -96,7 +96,6 @@ class DynamoTests(unittest.TestCase):
                       Body=gzip.compress(json.dumps({"Records": [cloudtrail()]}).encode()))
         env = {"AWS_DEFAULT_REGION": "us-east-1", "PROFILES_TABLE": "profiles",
                "LOG_BUCKET": "test-cloudtrail-logs", "LOG_PREFIX": prefix,
-               "RISK_WEIGHTS_JSON": json.dumps(CONFIG["weights"]), "DENY_THRESHOLD": "70",
                "SENSITIVE_ACTIONS_JSON": '["iam:CreateUser"]',
                "IDENTITY_MAP_JSON": json.dumps({"alice": USER}),
                "ROUTE_ACTION_MAP_JSON": '{"GET /protected":"s3:ListBuckets"}',
@@ -122,7 +121,6 @@ class DynamoTests(unittest.TestCase):
                 result = authorizer.lambda_handler(incoming, None)
                 self.assertEqual(result["policyDocument"]["Statement"][0]["Effect"], "Allow")
                 incoming["requestContext"]["identity"]["sourceIp"] = "198.51.100.2"
-                incoming["requestContext"]["requestTimeEpoch"] += 14 * 3600 * 1000
                 result = authorizer.lambda_handler(incoming, None)
                 self.assertEqual(result["policyDocument"]["Statement"][0]["Effect"], "Deny")
         finally:

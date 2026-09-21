@@ -1,6 +1,6 @@
-﻿# LZTA: single-authorizer paper reproduction
+# LZTA: strict binary experimental baseline
 
-This project implements the serverless architecture described by Vivek S, Smitha Vinod, and Sreeja CS J in *Lightweight Zero Trust Access Control with Behavior-Based Anomaly Detection in Cloud* (CICN 2025), using the supplied paper text. It replaces the earlier two-stage draft. There is no Stage 2, SessionFlow table, escalation path, or Firehose pipeline.
+This project implements a strict binary experimental baseline inspired by the serverless architecture described by Vivek S, Smitha Vinod, and Sreeja CS J in *Lightweight Zero Trust Access Control with Behavior-Based Anomaly Detection in Cloud* (CICN 2025), using the supplied paper text. This is the first implementation step: test the single-stage baseline before adding the planned two-stage FYP extension. Stage 2, the `SessionFlow` table, and escalation are not implemented yet. The original extension requirements remain in [the two-stage design notes](docs/original_two_stage_context.md).
 
 **Offline:** CloudTrail → encrypted S3 → Python Lambda → `UserBehaviorProfiles`.
 
@@ -10,18 +10,22 @@ This project implements the serverless architecture described by Vivek S, Smitha
 
 The paper does not publish its code, full scoring configuration, identity mapping, or dataset. This is an executable implementation of the described architecture with explicit assumptions, not a claim that its reported accuracy, latency, or cost has been independently reproduced. See [reproduction notes](docs/paper_replication.md).
 
-## Your configured rules
+## Binary decision rule
 
-| Anomaly | Points |
-| --- | ---: |
-| Unknown IP, compared with `knownIPs` | 50 |
-| UTC hour with zero observations in `hourHistogram` | 25 |
-| First-time sensitive action, compared with `actionCounts` | 30 |
-| Unknown device/User-Agent, compared with `userAgents` | 15 |
+**No detected anomaly: Allow. Any detected anomaly: Deny.** No weights, risk scores, thresholds, or escalation are used.
 
-Scores **below 70 Allow**, scores **70 or above Deny**. The former 20–69 escalation band now allows. Missing/invalid profiles, invalid JWTs, unmapped identities/routes, and backend errors deny regardless of scoring. These are implementation safeguards where the paper is silent.
+| Check | Deny condition |
+| --- | --- |
+| Source IP | Not in `knownIPs` |
+| Access hour | UTC hour has zero observations in `hourHistogram` |
+| Sensitive action | Configured sensitive action has zero occurrences in `actionCounts` |
+| Device/User-Agent | Not in `userAgents` |
 
-With these settings, an unknown IP alone (50) **allows**. Unknown IP plus off-hours (75) **denies**. Thus your chosen rules do not reproduce the paper's unknown-IP-only denial. Configuration remains editable in [config/risk.json](config/risk.json); deployment parameters are separate and must be kept consistent if changed.
+Missing/invalid profiles, invalid JWTs, unmapped identities/routes, and backend failures also deny. Known sensitive actions and new non-sensitive actions do not trigger the sensitive-action check.
+
+The paper describes risk scoring and binary outputs, but does not establish this exact any-anomaly-denies rule. Label this implementation a **strict binary baseline inspired by the paper**, not the authors' original algorithm. Compare a later Stage 2 extension using the same authenticated requests, profiles, labels, and training/testing split. Rejecting more legitimate changes does not by itself prove that an extension is better.
+
+`config/risk.json` declares `decision_policy: deny_on_any_anomaly` and the sensitive-action list. Old weighted configurations are rejected. Remove `RiskWeightsJson` and `DenyThreshold` from existing deployment parameter files. Redeploy to activate this change on AWS. The previous weighted version remains available in Git commit `c3becdb`.
 
 ## Local setup and verification
 
