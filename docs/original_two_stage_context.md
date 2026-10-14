@@ -4,9 +4,18 @@ The two-stage design below remains the planned FYP extension. It is deferred unt
 
 ## Implementation sequence
 
+Experiment methodology selected on 2026-10-14: use synthetic training activity and labeled evaluation workloads across the whole project, while still sending actual authenticated test requests through the deployed API. Apply the same datasets and evaluation conditions to the compared approaches. See [the selected experiment methodology](paper_replication.md#selected-experiment-methodology-2026-10-14) for training/testing separation, actual request-context constraints, and the planned Stage 2 session telemetry requirements. This decision updates the evaluation plan; the original architecture requirements below remain historical context.
+
 1. Test the current paper-inspired single-stage baseline and record its behavior and limitations.
 2. Preserve a reproducible baseline version, then implement the two-stage extension described below.
 3. Compare both implementations using the same labeled requests, baseline data, and evaluation conditions.
+4. After the backend work, including Stage 2 and comparison experiments, is complete, build and validate the FYP presentation interface described below.
+
+## Presentation interface plan (2026-10-14)
+
+The user requested a presentation interface for the complete FYP, to be implemented after the backend and Stage 2 work is finished. Planned features are Cognito sign-in, controlled synthetic scenario execution through actual authenticated API requests, Allow/Deny results with decision reasons and escalation details where applicable, behavior/session profile views, and comparison charts for the evaluated approaches. Show recorded experiment results separately from live request results. The backend remains responsible for authorization decisions; the interface displays actual outcomes.
+
+Use the existing Cognito user pool. An additional user is not required merely to add an interface, but a dedicated demo user is planned for isolation of synthetic experiment profiles from real account activity. Its verified `sub` must be mapped to a separate experiment profile identity; creating a Cognito user does not create that DynamoDB profile. The demo user and interface have not yet been created. Configure the final interface callback/logout URLs and required API integration when implementing it.
 
 The current code and SAM template implement only the baseline: `UserBehaviorProfiles` and one authorizer with a strict any-anomaly-denies policy. They do not yet implement the extension's `BehaviorProfiles`, `SessionFlow`, or escalation logic. The binary policy is an explicit experimental choice, not a verified copy of the paper's scoring algorithm.
 

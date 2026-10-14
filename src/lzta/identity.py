@@ -1,4 +1,6 @@
 """Explicit reproduction assumption: RS256 JWT identity mapped to a CloudTrail ARN."""
+# checks that the request’s JWT is valid and returns its subject
+
 from functools import lru_cache
 from urllib.parse import urlparse
 

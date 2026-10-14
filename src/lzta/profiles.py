@@ -1,4 +1,7 @@
 """CloudTrail feature extraction and atomic, replay-safe profile aggregation."""
+# turns valid events into observations, such as the user’s IP address, User-Agent, UTC access hour, and AWS action.
+# adds those observations to that user’s profile in DynamoDB
+# guards against duplicate log delivery
 from datetime import datetime, timezone
 from lzta.scoring import normalize_ip
 

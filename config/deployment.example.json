@@ -1,11 +1,11 @@
 {
-  "LogBucketName": "REPLACE-WITH-GLOBALLY-UNIQUE-BUCKET",
+  "LogBucketName": "REPLACE-BUCKET-NAME",
   "StageName": "dev",
   "SensitiveActionsJson": "[\"iam:CreateUser\"]",
-  "IdentityMapJson": "{\"REPLACE-JWT-SUBJECT\":\"arn:aws:iam::REPLACE-ACCOUNT:user/REPLACE-USER\"}",
+  "IdentityMapJson": "{\"REPLACE-JWT-SUB\":\"REPLACE-IAM-ARN\"}",
   "RouteActionMapJson": "{\"GET /protected\":\"s3:ListBuckets\"}",
   "JwtIssuer": "https://REPLACE-ISSUER",
   "JwtAudience": "REPLACE-AUDIENCE",
   "JwtJwksUrl": "https://REPLACE-ISSUER/REPLACE-JWKS-PATH",
-  "CaptureDataEvents": "true"
+  "CaptureDataEvents": "false"
 }

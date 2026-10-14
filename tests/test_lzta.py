@@ -43,7 +43,7 @@ def api_event():
             "requestContext": {"identity": {"sourceIp": "192.0.2.1"}, "requestId": "r1",
                                "requestTimeEpoch": 1767258000000}}
 
-
+# checks normal access, each anomaly, combinations of anomalies, and invalid profiles or configuration.
 class RuleTests(unittest.TestCase):
     def setUp(self):
         self.rules = Rules.from_dict(CONFIG)
@@ -90,7 +90,7 @@ class RuleTests(unittest.TestCase):
             with self.subTest(data=data), self.assertRaises(ValueError):
                 Rules.from_dict(data)
 
-
+#  checks the API authorization path, including invalid tokens, spoofed headers, and backend errors.
 class AuthorizerTests(unittest.TestCase):
     def setUp(self):
         self.config = {"rules": Rules.from_dict(CONFIG), "identities": {"alice": USER},
@@ -145,7 +145,7 @@ class AuthorizerTests(unittest.TestCase):
         _, log = self.run_auth(event)
         self.assertEqual(log["anomalies"], ["unmapped_action"])
 
-
+# checks CloudTrail event parsing, compressed S3 log processing, and duplicate delivery.
 class IngestionTests(unittest.TestCase):
     def test_features_and_invalid_events(self):
         self.assertEqual(observation(cloudtrail())["action"], "s3:ListBuckets")

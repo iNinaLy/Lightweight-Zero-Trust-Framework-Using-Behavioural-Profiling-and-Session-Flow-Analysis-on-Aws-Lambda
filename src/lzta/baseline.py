@@ -1,4 +1,7 @@
 """Offline pipeline: CloudTrail gzip JSON in S3 -> UserBehaviorProfiles."""
+# receives an S3 notification when a CloudTrail log arrives
+# reads the compressed log and passes its events onward
+
 import gzip
 import json
 import os

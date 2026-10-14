@@ -54,10 +54,21 @@ The intended workflow is to keep the completed approaches together on `main`, wi
 
 Finish validating the binary baseline first, then add the weighted baseline, then Stage 2. The primary contribution comparison should be single-stage weighted versus two-stage weighted: keep shared Stage 1 signals and weights consistent, and explicitly define the single-stage decision for requests that would enter the two-stage escalation band. Use the same labeled evaluation traffic and separate training data for all approaches. Report false positives, false negatives, latency, and cost rather than assuming that more permissive decisions indicate an improvement.
 
+## Selected experiment methodology (2026-10-14)
+
+The user selected synthetic workloads for the whole project, including baseline training, single-stage evaluation, and the planned two-stage extension. Actual authenticated test requests will still be sent through the deployed API Gateway endpoint to exercise the online authorization path and measure AWS behavior and latency.
+
+- Generate controlled synthetic training activity and separate labeled test scenarios, including normal behavior, legitimate changes, and attacks. Keep test activity out of the training profiles.
+- Use the same training data, identities, test scenarios, and ground-truth labels across the compared approaches. Preserve dataset versions and experiment configurations for reproducibility.
+- For offline ingestion tests, use explicitly labeled synthetic CloudTrail-format records through the S3-to-Lambda-to-DynamoDB pipeline. Keep these experiment profiles separate from profiles learned from real account activity. Synthetic log generation/upload tooling is still to be implemented.
+- Drive actual API requests for online tests. API Gateway supplies the observed source IP and request time; invented values in training records do not change those request-context values. Plan the request networks and times accordingly, and record the actual contexts used.
+- For Stage 2, generate actual request sequences and collect their session telemetry through a separately defined application telemetry mechanism. CloudTrail does not supply ordinary custom API endpoint invocations. Session telemetry and Stage 2 remain to be implemented.
+- Report decision metrics as results on a synthetic labeled workload. Measure latency and cost from the actual AWS experiment, and distinguish them from local simulation results. Do not present synthetic activity as genuine user history or claim real-world detection accuracy from it.
+
 ## AWS validation protocol
 
 1. Configure an actual JWT issuer/audience/JWKS URL, subject-to-ARN mapping, route/action mapping, and AWS account/Region; deploy the stack after reviewing its changeset.
-2. Generate controlled legitimate CloudTrail observations for that principal. Confirm the stored sets/counts before testing. Custom application HTTP calls do not generate this CloudTrail baseline.
+2. Populate a separate experiment profile with controlled synthetic training records using the selected methodology above. Confirm the stored sets/counts before testing. Real CloudTrail observations can additionally validate ingestion, but must not accidentally mix into the synthetic experiment profile. Custom application HTTP calls do not generate this CloudTrail baseline.
 3. Run normal access, change to another network, test outside learned UTC hours, and test a route mapped to an unseen sensitive action. Repeat each ten times, recording actual decisions and detected anomalies. Each isolated anomaly should deny under the strict baseline.
 4. Run the opt-in 30-request client benchmark. Record its client round-trip timings separately from Lambda REPORT durations. Identify real initialization durations in CloudWatch; do not label the first request a cold start without evidence.
 5. Build a labeled dataset before computing false-positive/false-negative rates, and retain its labels and confusion matrix. Do not substitute synthetic rule checks for detection accuracy.

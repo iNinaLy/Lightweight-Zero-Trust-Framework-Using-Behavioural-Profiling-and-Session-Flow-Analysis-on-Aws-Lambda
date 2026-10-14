@@ -5,6 +5,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
@@ -40,9 +41,14 @@ def main():
     workdir = ROOT / "infrastructure"
     subprocess.run([sam, "validate", "--lint", "--region", args.region, "--template-file", "template.yaml"], cwd=workdir, check=True)
     subprocess.run([sam, "build", "--use-container", "--template-file", "template.yaml"], cwd=workdir, check=True)
-    subprocess.run([sam, "deploy", "--region", args.region, "--stack-name", args.stack_name,
-                    "--resolve-s3", "--capabilities", "CAPABILITY_IAM", "--confirm-changeset",
-                    "--parameter-overrides", *[f"{key}={value}" for key, value in values.items()]], cwd=workdir, check=True)
+    # SAM 1.169+ supports YAML parameter files. JSON is valid YAML, so preserve
+    # the values verbatim without passing embedded quotes through Windows/SAM.
+    with tempfile.TemporaryDirectory(prefix="lzta-deploy-") as directory:
+        parameter_file = Path(directory) / "parameters.yaml"
+        parameter_file.write_text(json.dumps(values), encoding="utf-8")
+        subprocess.run([sam, "deploy", "--region", args.region, "--stack-name", args.stack_name,
+                        "--resolve-s3", "--capabilities", "CAPABILITY_IAM", "--confirm-changeset",
+                        "--parameter-overrides", "file://" + parameter_file.as_posix()], cwd=workdir, check=True)
 
 
 if __name__ == "__main__":

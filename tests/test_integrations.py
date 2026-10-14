@@ -1,4 +1,5 @@
 """Real JWT crypto and emulated DynamoDB transaction checks; no AWS calls."""
+# creates and verifies actual signed test JWTs and emulates DynamoDB and S3 locally.
 import copy
 from datetime import datetime, timedelta, timezone
 import json

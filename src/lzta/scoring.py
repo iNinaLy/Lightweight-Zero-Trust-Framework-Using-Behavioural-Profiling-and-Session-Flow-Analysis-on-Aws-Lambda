@@ -1,4 +1,6 @@
 """Strict binary baseline: any behavioral anomaly denies; no risk scoring."""
+#compares the request with that profile
+
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
