@@ -129,10 +129,37 @@ class AuthorizerTests(unittest.TestCase):
         self.assertEqual(log["verdict"], "Deny")
         self.store.get.assert_not_called()
 
+    def test_lambda_handler_denies_missing_token_without_initializing_store(self):
+        from lzta import authorizer
+        event = api_event()
+        event["headers"].pop("Authorization")
+        with patch.object(authorizer, "settings", return_value=self.config), \
+             patch.object(authorizer, "store") as store, \
+             contextlib.redirect_stdout(io.StringIO()):
+            result = authorizer.lambda_handler(event, None)
+        store.assert_not_called()
+        self.assertEqual(result["policyDocument"]["Statement"][0]["Effect"], "Deny")
+
     def test_store_failure_denies(self):
         self.store.get.side_effect = RuntimeError("unavailable")
         _, log = self.run_auth(api_event())
         self.assertEqual(log["verdict"], "Deny")
+
+    def test_phase_logs_identify_failed_lookup_without_credentials(self):
+        self.store.get.side_effect = RuntimeError("private backend detail")
+        with contextlib.redirect_stdout(io.StringIO()) as logs:
+            result = authorize(api_event(), self.config, self.store, self.verifier)
+        records = [json.loads(line) for line in logs.getvalue().splitlines()]
+        phases = [record for record in records if record["eventType"] == "authorization_phase"]
+        self.assertEqual([(p["phase"], p["status"]) for p in phases], [
+            ("token_verification", "started"), ("token_verification", "completed"),
+            ("profile_store_initialization", "started"), ("profile_store_initialization", "completed"),
+            ("profile_lookup", "started"), ("profile_lookup", "failed"),
+        ])
+        self.assertTrue(all(p["requestId"] == "r1" for p in phases))
+        self.assertNotIn("signed-token", logs.getvalue())
+        self.assertNotIn("private backend detail", logs.getvalue())
+        self.assertEqual(result["policyDocument"]["Statement"][0]["Effect"], "Deny")
 
     def test_unmapped_identity_and_route_deny(self):
         self.verifier.return_value = "unmapped"

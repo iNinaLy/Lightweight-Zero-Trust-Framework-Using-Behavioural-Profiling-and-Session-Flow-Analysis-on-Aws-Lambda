@@ -243,3 +243,6 @@ Thumbs.db
 # Local LZTA deployment inputs
 config/deployment.local.json
 reports/live-*.json
+.tools/
+reports/lzta-document-portal.tar.gz
+reports/portal-preview*.png

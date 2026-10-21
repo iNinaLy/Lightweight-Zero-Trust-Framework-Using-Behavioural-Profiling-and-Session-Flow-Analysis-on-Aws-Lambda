@@ -1,0 +1,2257 @@
+  {
+  "dataset_version": "1.0.0",
+  "dataset_id": "lzta-synthetic-v1-seed-2026",
+  "seed": 2026,
+  "profile_identity": "arn:aws:iam::123456789012:user/lzta-synthetic",
+  "training": {
+    "source": "synthetic_cloudtrail",
+    "records": [
+      {
+        "eventID": "synthetic-training-2026-000000",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-04T09:20:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000001",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-17T10:32:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000002",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-21T11:55:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000003",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-04T13:56:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000004",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-08T14:57:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000005",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-20T15:39:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000006",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-18T09:26:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000007",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-26T10:36:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000008",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-18T11:53:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000009",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-24T13:49:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000010",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-25T14:31:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000011",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-25T15:49:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000012",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-19T09:28:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000013",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-08T10:00:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000014",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-20T11:05:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000015",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-04T13:18:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000016",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-27T14:06:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000017",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-15T15:00:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000018",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-27T09:57:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000019",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-22T10:31:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000020",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-22T11:20:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000021",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-07T13:25:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000022",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-09T14:22:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000023",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-30T15:22:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000024",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-26T09:24:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000025",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-24T10:32:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000026",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-21T11:04:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000027",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-24T13:21:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000028",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-03T14:35:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000029",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-18T15:18:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000030",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-10T09:29:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000031",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-05T10:56:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000032",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-21T11:45:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000033",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-23T13:36:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000034",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-10T14:01:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000035",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-28T15:45:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000036",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-12T09:23:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000037",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-15T10:27:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000038",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-03T11:25:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000039",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-29T13:37:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000040",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-18T14:31:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000041",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-28T15:07:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000042",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-14T09:32:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000043",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-26T10:48:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000044",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-28T11:38:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000045",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-29T13:31:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000046",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-13T14:58:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000047",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-17T15:16:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000048",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-28T09:26:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000049",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-19T10:59:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000050",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-16T11:32:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000051",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-17T13:51:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000052",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-01T14:36:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000053",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-08T15:49:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000054",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-05T09:52:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000055",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-02T10:45:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000056",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-17T11:56:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000057",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-22T13:06:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000058",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-23T14:39:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000059",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-14T15:30:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000060",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-05T09:30:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000061",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-29T10:14:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000062",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-28T11:56:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000063",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-04T13:40:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000064",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-23T14:29:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000065",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-22T15:30:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000066",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-23T09:59:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000067",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-18T10:16:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000068",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-18T11:25:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000069",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-22T13:19:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000070",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-18T14:51:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000071",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-21T15:32:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000072",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-23T09:30:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000073",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-26T10:56:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000074",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-13T11:27:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000075",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-07T13:18:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000076",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-27T14:17:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000077",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-01T15:02:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000078",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-05T09:41:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000079",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-29T10:38:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000080",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-15T11:51:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000081",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-17T13:59:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000082",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-16T14:23:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000083",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-30T15:12:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000084",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-09T09:44:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000085",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-16T10:29:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000086",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-17T11:49:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000087",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-27T13:31:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000088",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-26T14:27:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000089",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-18T15:42:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000090",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-30T09:02:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000091",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-27T10:18:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000092",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-11T11:29:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000093",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-30T13:51:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000094",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-04T14:28:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000095",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-23T15:45:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000096",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-26T09:32:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000097",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-09T10:28:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000098",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.10",
+        "eventTime": "2026-01-30T11:11:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      },
+      {
+        "eventID": "synthetic-training-2026-000099",
+        "userIdentity": {
+          "type": "IAMUser",
+          "arn": "arn:aws:iam::123456789012:user/lzta-synthetic"
+        },
+        "sourceIPAddress": "192.0.2.11",
+        "eventTime": "2026-01-14T13:53:00Z",
+        "userAgent": "lzta-synthetic-agent/1.0",
+        "eventSource": "s3.amazonaws.com",
+        "eventName": "ListBuckets"
+      }
+    ]
+  },
+  "evaluation": {
+    "label_semantics": "Generator-assigned legitimate or attack scenario; labels are synthetic ground truth.",
+    "request_context_note": "Planned synthetic context only; AWS runs must record API Gateway-observed IP and time.",
+    "cases": [
+      {
+        "case_id": "normal-000",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-001",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-002",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-003",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-004",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-005",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-006",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-007",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-008",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "normal-009",
+        "scenario": "normal",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-000",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-001",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-002",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-003",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-004",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-005",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-006",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-007",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-008",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_ip-009",
+        "scenario": "legitimate_new_ip",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "203.0.113.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-000",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-001",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-002",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-003",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-004",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-005",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-006",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-007",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-008",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_new_device-009",
+        "scenario": "legitimate_new_device",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "new-legitimate-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-000",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-001",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-002",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-003",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-004",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-005",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-006",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-007",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-008",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "legitimate_off_hours-009",
+        "scenario": "legitimate_off_hours",
+        "label": "legitimate",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-000",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-001",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-002",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-003",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-004",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-005",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-006",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-007",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-008",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_ip-009",
+        "scenario": "attack_unknown_ip",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "198.51.100.50",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-000",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-001",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-002",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-003",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-004",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-005",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-006",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-007",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-008",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_unknown_device-009",
+        "scenario": "attack_unknown_device",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "unknown-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-000",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-001",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-002",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-003",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-004",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-005",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-006",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-007",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-008",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_off_hours-009",
+        "scenario": "attack_off_hours",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "s3:ListBuckets",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T23:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-000",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-001",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-002",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-003",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-004",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-005",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-006",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-007",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-008",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      },
+      {
+        "case_id": "attack_sensitive_action-009",
+        "scenario": "attack_sensitive_action",
+        "label": "attack",
+        "request": {
+          "method": "GET",
+          "resource": "/protected",
+          "action": "iam:CreateUser",
+          "source_ip": "192.0.2.10",
+          "request_time": "2026-02-01T09:00:00Z",
+          "user_agent": "lzta-synthetic-agent/1.0"
+        }
+      }
+    ]
+  }
+}

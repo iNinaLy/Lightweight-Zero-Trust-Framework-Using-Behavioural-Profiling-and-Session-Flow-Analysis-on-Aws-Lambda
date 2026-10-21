@@ -59,6 +59,15 @@ The deployment helper validates inputs, runs SAM lint/build, and asks SAM to sho
 
 ## Establish a baseline and evaluate
 
+Generate a versioned synthetic dataset with separate CloudTrail-format training records and labeled evaluation requests, then evaluate the local strict binary baseline:
+
+```powershell
+python tools/generate_dataset.py --seed 2026 --training-count 100 --repeats 10
+python tools/evaluate_dataset.py tests/simulations/lzta-synthetic-v1-seed-2026.json --output reports/baseline-seed-2026.json
+```
+
+The generator is deterministic for a given seed. Its labels and local confusion matrix describe only the synthetic workload; they are not real-world accuracy, and local runs do not measure AWS latency or cost. Keep this dataset unchanged when comparing later approaches.
+
 Perform legitimate AWS calls using the same AWS principal configured in the JWT identity map, with the source IP, User-Agent, and UTC hours you intend to teach. CloudTrail gzip files arriving in S3 trigger automatic profile updates. CloudTrail delivery is asynchronous (typically around five minutes), not a strict five-minute schedule. Requests without a learned profile deny.
 
 CloudTrail does **not** collect ordinary custom API Gateway endpoint invocations. Calling `/protected` alone does not train the profile. The paper combines AWS-operation baselines with application authorization; this repository implements that distinction rather than pretending the two event streams are identical.
@@ -75,3 +84,11 @@ python tools/benchmark.py https://YOUR-API.execute-api.us-east-1.amazonaws.com/d
 The benchmark measures client round-trip time, not Lambda duration. Use the deployed CloudWatch query/dashboard to inspect Lambda REPORT durations and initialization time separately. A first request is not automatically a cold start. Compare measured results with the paper only after running the AWS experiment.
 
 See [directory architecture](directory_architecture.md), [infrastructure notes](docs/infrastructure.md), and [paper replication details](docs/paper_replication.md).
+
+## Confidential HR operations portal
+
+The main behavioural experiment now uses [four synthetic AWS-user personas](docs/hr_behaviour_simulation.md), including frequent overtime and established hybrid work. Run `python tools/generate_aws_workload.py`, then `python tools/evaluate_aws_workload.py DATASET_PATH`. First-time hybrid work/overtime is specified to flag for future Stage 2; out-of-scope actions have independent permission-denial fixtures. The evaluator currently measures the strict binary baseline. Earlier HR-action datasets are historical. Live AWS resources remain unchanged.
+
+The [Northstar HR console](https://lzta-document-workspace.divine-crab-2107.chatgpt.site) is an HR-staff workspace for a company-wide payroll register, confidential employee/payment/identity records, restricted reviews, protected payroll CSV exports, access audit, and session details. It contains 16 explicitly fictional employee records. The previous employee self-service interface has been replaced. Sign-in returns directly to the website using authorization code flow with PKCE; the localhost callback remains available for the CLI helper.
+
+The portal uses the existing separate `lzta-document-portal` AWS stack and its own profiles, metadata, and file bucket. Backend HR-role authorization is independent of behavioural checks: a familiar employee cannot access company-wide HR data. All confidential data and initial behaviour profiles are synthetic fixtures, not real employee data or learned application history. Stage 2 and automatic baseline learning remain unimplemented. See [HR console setup and checks](docs/hr_console.md).

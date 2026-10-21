@@ -1,0 +1,152 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "Isolated synthetic AWS ingestion verification; no CloudTrail resource.",
+  "Resources": {
+    "Profiles": {
+      "Type": "AWS::DynamoDB::Table",
+      "Properties": {
+        "TableName": "lzta-isolated-ingestion-profiles",
+        "BillingMode": "PAY_PER_REQUEST",
+        "AttributeDefinitions": [
+          {
+            "AttributeName": "userId",
+            "AttributeType": "S"
+          }
+        ],
+        "KeySchema": [
+          {
+            "AttributeName": "userId",
+            "KeyType": "HASH"
+          }
+        ],
+        "SSESpecification": {
+          "SSEEnabled": true
+        }
+      }
+    },
+    "Input": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketName": "lzta-ingestion-test-623740184949-us-east-1",
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true,
+          "RestrictPublicBuckets": true
+        },
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "Role": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com"
+              },
+              "Action": "sts:AssumeRole"
+            }
+          ]
+        },
+        "Policies": [
+          {
+            "PolicyName": "isolated-ingestion",
+            "PolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "s3:GetObject"
+                  ],
+                  "Resource": "arn:aws:s3:::lzta-ingestion-test-623740184949-us-east-1/synthetic-aws/*"
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "dynamodb:GetItem",
+                    "dynamodb:UpdateItem",
+                    "dynamodb:PutItem"
+                  ],
+                  "Resource": {
+                    "Fn::GetAtt": [
+                      "Profiles",
+                      "Arn"
+                    ]
+                  }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "logs:CreateLogStream",
+                    "logs:PutLogEvents"
+                  ],
+                  "Resource": "arn:aws:logs:us-east-1:623740184949:log-group:/aws/lambda/lzta-isolated-ingestion-test:*"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "Logs": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/lzta-isolated-ingestion-test",
+        "RetentionInDays": 7
+      }
+    },
+    "Function": {
+      "Type": "AWS::Lambda::Function",
+      "DependsOn": "Logs",
+      "Properties": {
+        "FunctionName": "lzta-isolated-ingestion-test",
+        "Runtime": "python3.14",
+        "Handler": "lzta.baseline.lambda_handler",
+        "Role": {
+          "Fn::GetAtt": [
+            "Role",
+            "Arn"
+          ]
+        },
+        "MemorySize": 512,
+        "Timeout": 300,
+        "Code": {
+          "S3Bucket": "lzta-portal-code-623740184949-us-east-1",
+          "S3Key": "isolated-ingestion/afbedfad7b14436689aaeb3cd82e84d222bc3c5bc6e19cf1bd4b8415118197c4.zip"
+        },
+        "Environment": {
+          "Variables": {
+            "PROFILES_TABLE": "lzta-isolated-ingestion-profiles",
+            "LOG_BUCKET": "lzta-ingestion-test-623740184949-us-east-1",
+            "LOG_PREFIX": "synthetic-aws/"
+          }
+        }
+      }
+    },
+    "InvokePermission": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "Function"
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": "s3.amazonaws.com",
+        "SourceAccount": "623740184949",
+        "SourceArn": "arn:aws:s3:::lzta-ingestion-test-623740184949-us-east-1"
+      }
+    }
+  }
+}

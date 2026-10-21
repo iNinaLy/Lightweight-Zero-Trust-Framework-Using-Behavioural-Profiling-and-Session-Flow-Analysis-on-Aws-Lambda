@@ -20,6 +20,44 @@ from moto import mock_aws
 from lzta.identity import verify
 from lzta.profiles import ProfileStore, observation
 from test_lzta import cloudtrail, USER
+from tools.generate_dataset import build_dataset
+from tools.evaluate_dataset import run_experiment
+from lzta.scoring import Rules
+
+
+class SyntheticDatasetTests(unittest.TestCase):
+    def test_generation_is_reproducible_and_training_records_are_usable(self):
+        first = build_dataset(seed=7, training_count=20, repeats=2)
+        second = build_dataset(seed=7, training_count=20, repeats=2)
+
+        self.assertEqual(first, second)
+        self.assertEqual(len(first["training"]["records"]), 20)
+        self.assertEqual(len(first["evaluation"]["cases"]), 16)
+        self.assertTrue(all(observation(record) for record in first["training"]["records"]))
+        self.assertEqual(len({record["eventID"] for record in first["training"]["records"]}), 20)
+        self.assertEqual(
+            {case["label"] for case in first["evaluation"]["cases"]},
+            {"legitimate", "attack"},
+        )
+        self.assertTrue(all("eventID" not in case for case in first["evaluation"]["cases"]))
+
+    def test_empty_training_or_evaluation_rejected(self):
+        for kwargs in ({"training_count": 0}, {"repeats": 0}):
+            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                build_dataset(**kwargs)
+
+    def test_baseline_experiment_reports_labeled_confusion_matrix(self):
+        dataset = build_dataset(seed=7, training_count=20, repeats=2)
+        report = run_experiment(dataset, Rules.from_dict({
+            "decision_policy": "deny_on_any_anomaly",
+            "sensitive_actions": ["iam:CreateUser"],
+        }))
+
+        self.assertEqual(report["metrics"]["true_positive"], 8)
+        self.assertEqual(report["metrics"]["false_negative"], 0)
+        self.assertEqual(report["metrics"]["true_negative"], 2)
+        self.assertEqual(report["metrics"]["false_positive"], 6)
+        self.assertEqual(report["evaluation_cases"], 16)
 
 
 class JwtTests(unittest.TestCase):

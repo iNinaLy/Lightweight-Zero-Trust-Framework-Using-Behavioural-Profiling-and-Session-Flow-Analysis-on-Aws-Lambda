@@ -220,6 +220,8 @@ Resources:
   ZeroTrustAuthorizer:
     Type: AWS::Serverless::Function
     Properties:
+      # JWT crypto and boto3 cold initialization need more CPU than 128 MB provides.
+      MemorySize: 512
       Description: zero-trust-authorizer - signed JWT verification and single-stage binary behavioral decision.
       Handler: lzta.authorizer.lambda_handler
       Environment:

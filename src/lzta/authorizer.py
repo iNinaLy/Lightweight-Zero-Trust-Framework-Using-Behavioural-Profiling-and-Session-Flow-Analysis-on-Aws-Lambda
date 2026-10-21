@@ -2,12 +2,28 @@
 import json
 import os
 import time
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from functools import lru_cache
 from lzta.identity import verify
 from lzta.logging import emit
 from lzta.profiles import ProfileStore
 from lzta.scoring import Request, Rules, evaluate, normalize_ip
+
+
+@contextmanager
+def phase(name, request_id):
+    started = time.perf_counter()
+    emit("authorization_phase", phase=name, status="started", requestId=request_id)
+    try:
+        yield
+    except Exception as exc:
+        emit("authorization_phase", phase=name, status="failed", requestId=request_id,
+             errorType=type(exc).__name__, durationMs=round((time.perf_counter() - started) * 1000, 3))
+        raise
+    else:
+        emit("authorization_phase", phase=name, status="completed", requestId=request_id,
+             durationMs=round((time.perf_counter() - started) * 1000, 3))
 
 
 def policy(user, effect, arn):
@@ -48,8 +64,9 @@ def store():
     return ProfileStore(boto3.resource("dynamodb").Table(os.environ["PROFILES_TABLE"]))
 
 
-def authorize(event, config, profiles, verifier=verify):
+def authorize(event, config, profiles=None, verifier=verify):
     started = time.perf_counter()
+    request_id = (event.get("requestContext") or {}).get("requestId")
     user, source, anomalies, verdict = "unauthenticated", None, ["invalid_request"], "Deny"
     arn = event.get("methodArn")
     if not isinstance(arn, str) or ":execute-api:" not in arn:
@@ -59,7 +76,8 @@ def authorize(event, config, profiles, verifier=verify):
         token = headers.get("authorization", "").split()
         if len(token) != 2 or token[0].lower() != "bearer":
             raise ValueError("Missing bearer token")
-        subject = verifier(token[1], config["issuer"], config["audience"], config["jwks_url"])
+        with phase("token_verification", request_id):
+            subject = verifier(token[1], config["issuer"], config["audience"], config["jwks_url"])
         user = config["identities"].get(subject)
         if not user:
             user = "unmapped"
@@ -77,7 +95,12 @@ def authorize(event, config, profiles, verifier=verify):
                 agent = headers.get("user-agent", "")
                 if not isinstance(agent, str) or not agent:
                     raise ValueError("Missing User-Agent")
-                decision = evaluate(Request(user, source, agent, action, when), profiles.get(user), config["rules"])
+                with phase("profile_store_initialization", request_id):
+                    profile_store = profiles if profiles is not None else store()
+                with phase("profile_lookup", request_id):
+                    profile = profile_store.get(user)
+                with phase("rule_evaluation", request_id):
+                    decision = evaluate(Request(user, source, agent, action, when), profile, config["rules"])
                 verdict, anomalies = decision.verdict, list(decision.anomalies)
     except Exception as exc:
         # Backend, token, and input errors must never turn into an Allow.
@@ -91,10 +114,10 @@ def authorize(event, config, profiles, verifier=verify):
 
 def lambda_handler(event, context):
     try:
-        config, profiles = settings(), store()
+        config = settings()
     except Exception as exc:
         emit("authorization_error", errorType=type(exc).__name__)
         emit("access_decision", user="unavailable", ip=None, decisionPolicy="deny_on_any_anomaly",
              anomalies=["configuration_error"], verdict="Deny")
         return policy("unavailable", "Deny", event["methodArn"])
-    return authorize(event, config, profiles)
+    return authorize(event, config)

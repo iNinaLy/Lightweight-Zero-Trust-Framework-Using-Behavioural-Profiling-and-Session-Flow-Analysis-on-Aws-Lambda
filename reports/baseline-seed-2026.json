@@ -1,0 +1,55 @@
+{
+  "kind": "synthetic_labeled_baseline_experiment",
+  "dataset_id": "lzta-synthetic-v1-seed-2026",
+  "dataset_version": "1.0.0",
+  "decision_policy": "deny_on_any_anomaly",
+  "training_records": 100,
+  "evaluation_cases": 80,
+  "metrics": {
+    "true_positive": 40,
+    "false_positive": 30,
+    "true_negative": 10,
+    "false_negative": 0,
+    "false_positive_rate": 0.75,
+    "false_negative_rate": 0.0
+  },
+  "scenarios": {
+    "attack_off_hours": {
+      "deny": 10,
+      "true_positive": 10
+    },
+    "attack_sensitive_action": {
+      "deny": 10,
+      "true_positive": 10
+    },
+    "attack_unknown_device": {
+      "deny": 10,
+      "true_positive": 10
+    },
+    "attack_unknown_ip": {
+      "deny": 10,
+      "true_positive": 10
+    },
+    "legitimate_new_device": {
+      "deny": 10,
+      "false_positive": 10
+    },
+    "legitimate_new_ip": {
+      "deny": 10,
+      "false_positive": 10
+    },
+    "legitimate_off_hours": {
+      "deny": 10,
+      "false_positive": 10
+    },
+    "normal": {
+      "allow": 10,
+      "true_negative": 10
+    }
+  },
+  "limitations": [
+    "Labels and workload are synthetic; these are not real-world detection accuracy.",
+    "Local evaluation does not measure AWS latency or cost.",
+    "Evaluation request contexts are planned inputs, not API Gateway observations."
+  ]
+}

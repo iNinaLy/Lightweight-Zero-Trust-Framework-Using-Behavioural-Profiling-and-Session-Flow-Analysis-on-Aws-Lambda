@@ -1,0 +1,7 @@
+{
+  "apiBase": "https://81v2d29ksf.execute-api.us-east-1.amazonaws.com/demo",
+  "cognitoDomain": "us-east-1nzxn9ulu0.auth.us-east-1.amazoncognito.com",
+  "clientId": "2j02ce64uu59p5v9fbu8rksnrh",
+  "issuer": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_nZXN9UlU0",
+  "redirectUri": "https://lzta-document-workspace.divine-crab-2107.chatgpt.site/"
+}

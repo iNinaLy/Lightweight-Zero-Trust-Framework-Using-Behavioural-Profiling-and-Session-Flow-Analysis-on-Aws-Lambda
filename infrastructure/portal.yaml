@@ -1,0 +1,270 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Isolated LZTA employee HR and payroll portal with strict behavioural enforcement.
+
+Parameters:
+  PortalOrigin:
+    Type: String
+    AllowedPattern: 'https://[^/]+'
+  LambdaCodeBucket:
+    Type: String
+  LambdaCodeKey:
+    Type: String
+  IdentityMapJson:
+    Type: String
+  JwtIssuer:
+    Type: String
+  JwtAudience:
+    Type: String
+  JwtJwksUrl:
+    Type: String
+
+Globals:
+  Function:
+    Runtime: python3.14
+    MemorySize: 512
+    Timeout: 10
+    Environment:
+      Variables:
+        PORTAL_ORIGIN: !Ref PortalOrigin
+        PROFILES_TABLE: !Ref PortalProfiles
+        IDENTITY_MAP_JSON: !Ref IdentityMapJson
+        JWT_ISSUER: !Ref JwtIssuer
+        JWT_AUDIENCE: !Ref JwtAudience
+        JWT_JWKS_URL: !Ref JwtJwksUrl
+        SENSITIVE_ACTIONS_JSON: '["portal:DeleteDocument","hr:ViewPayslips","hr:ReadPayslip","hr:DownloadPayslip","hr:ViewCompanySummary","hr:ViewPayrollRegister","hr:ExportPayroll","hr:ReadEmployeeRecords","hr:ListConfidentialReviews","hr:ReadConfidentialReview","hr:ViewAudit"]'
+        ROUTE_ACTION_MAP_JSON: '{"GET /documents":"portal:ListDocuments","POST /documents":"portal:UploadDocument","GET /documents/{documentId}/download":"portal:DownloadDocument","PATCH /documents/{documentId}":"portal:RenameDocument","DELETE /documents/{documentId}":"portal:DeleteDocument","GET /activity":"portal:ViewActivity","GET /employee":"hr:ViewEmployee","GET /payslips":"hr:ViewPayslips","GET /payslips/{payslipId}":"hr:ReadPayslip","GET /payslips/{payslipId}/download":"hr:DownloadPayslip","GET /policies":"hr:ViewPolicies","GET /policies/{policyId}":"hr:ReadPolicy","GET /leave-requests":"hr:ViewLeave","POST /leave-requests":"hr:SubmitLeave","PATCH /leave-requests/{leaveId}":"hr:UpdateLeave","DELETE /leave-requests/{leaveId}":"hr:CancelLeave","GET /api/v1/hr/summary":"hr:ViewCompanySummary","GET /api/v1/hr/payroll":"hr:ViewPayrollRegister","POST /api/v1/hr/payroll/export":"hr:ExportPayroll","GET /api/v1/hr/employees/{employeeId}":"hr:ReadEmployeeRecords","GET /api/v1/hr/reviews":"hr:ListConfidentialReviews","GET /api/v1/hr/reviews/{employeeId}":"hr:ReadConfidentialReview","GET /api/v1/hr/audit":"hr:ViewAudit"}'
+
+Resources:
+  PortalProfiles:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions: [{AttributeName: userId, AttributeType: S}]
+      KeySchema: [{AttributeName: userId, KeyType: HASH}]
+      SSESpecification: {SSEEnabled: true}
+  DocumentsTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - {AttributeName: ownerId, AttributeType: S}
+        - {AttributeName: entryId, AttributeType: S}
+      KeySchema:
+        - {AttributeName: ownerId, KeyType: HASH}
+        - {AttributeName: entryId, KeyType: RANGE}
+      SSESpecification: {SSEEnabled: true}
+  DocumentsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault: {SSEAlgorithm: AES256}
+  DocumentsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref DocumentsBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Deny
+            Principal: '*'
+            Action: s3:*
+            Resource: [!GetAtt DocumentsBucket.Arn, !Sub '${DocumentsBucket.Arn}/*']
+            Condition: {Bool: {'aws:SecureTransport': 'false'}}
+
+  PortalAuthorizer:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: {Bucket: !Ref LambdaCodeBucket, Key: !Ref LambdaCodeKey}
+      Handler: lzta.authorizer.lambda_handler
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: dynamodb:GetItem
+              Resource: !GetAtt PortalProfiles.Arn
+  PortalApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: demo
+      EndpointConfiguration: {Type: REGIONAL}
+      Cors:
+        AllowOrigin: !Sub "'${PortalOrigin}'"
+        AllowHeaders: "'Content-Type,Authorization'"
+        AllowMethods: "'GET,POST,PATCH,DELETE,OPTIONS'"
+      GatewayResponses:
+        DEFAULT_4XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: !Sub "'${PortalOrigin}'"
+              Access-Control-Expose-Headers: "'x-amzn-RequestId'"
+          ResponseTemplates:
+            application/json: '{"message":"Access denied. Check your session and behavioural baseline.","requestId":"$context.requestId"}'
+        DEFAULT_5XX:
+          ResponseParameters:
+            Headers:
+              Access-Control-Allow-Origin: !Sub "'${PortalOrigin}'"
+              Access-Control-Expose-Headers: "'x-amzn-RequestId'"
+          ResponseTemplates:
+            application/json: '{"message":"The authorization service is temporarily unavailable.","requestId":"$context.requestId"}'
+      Auth:
+        DefaultAuthorizer: StrictBaseline
+        AddDefaultAuthorizerToCorsPreflight: false
+        Authorizers:
+          StrictBaseline:
+            FunctionArn: !GetAtt PortalAuthorizer.Arn
+            FunctionPayloadType: REQUEST
+            Identity:
+              Headers: [Authorization]
+              ReauthorizeEvery: 0
+  PortalDocuments:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: {Bucket: !Ref LambdaCodeBucket, Key: !Ref LambdaCodeKey}
+      Handler: lzta.portal.lambda_handler
+      Timeout: 20
+      Environment:
+        Variables:
+          DOCUMENTS_TABLE: !Ref DocumentsTable
+          DOCUMENTS_BUCKET: !Ref DocumentsBucket
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:DeleteItem, dynamodb:Query]
+              Resource: !GetAtt DocumentsTable.Arn
+            - Effect: Allow
+              Action: [s3:GetObject, s3:PutObject, s3:DeleteObject]
+              Resource: !Sub '${DocumentsBucket.Arn}/*'
+      Events:
+        List:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /documents, Method: GET}
+        Upload:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /documents, Method: POST}
+        Rename:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/documents/{documentId}', Method: PATCH}
+        Delete:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/documents/{documentId}', Method: DELETE}
+        Download:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/documents/{documentId}/download', Method: GET}
+        Activity:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /activity, Method: GET}
+        Employee:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /employee, Method: GET}
+        Payslips:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /payslips, Method: GET}
+        ReadPayslip:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/payslips/{payslipId}', Method: GET}
+        PayrollDownload:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/payslips/{payslipId}/download', Method: GET}
+        Policies:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /policies, Method: GET}
+        ReadPolicy:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/policies/{policyId}', Method: GET}
+        Leave:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /leave-requests, Method: GET}
+        SubmitLeave:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: /leave-requests, Method: POST}
+        UpdateLeave:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/leave-requests/{leaveId}', Method: PATCH}
+        CancelLeave:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/leave-requests/{leaveId}', Method: DELETE}
+        ConfidentialRoute0:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/summary', Method: GET}
+        ConfidentialRoute1:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/payroll', Method: GET}
+        ConfidentialRoute2:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/payroll/export', Method: POST}
+        ConfidentialRoute3:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/employees/{employeeId}', Method: GET}
+        ConfidentialRoute4:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/reviews', Method: GET}
+        ConfidentialRoute5:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/reviews/{employeeId}', Method: GET}
+        ConfidentialRoute6:
+          Type: Api
+          Properties: {RestApiId: !Ref PortalApi, Path: '/api/v1/hr/audit', Method: GET}
+  PortalSession:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: {Bucket: !Ref LambdaCodeBucket, Key: !Ref LambdaCodeKey}
+      Handler: lzta.portal_session.lambda_handler
+      Environment:
+        Variables:
+          DOCUMENTS_TABLE: !Ref DocumentsTable
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action: dynamodb:GetItem
+              Resource: [!GetAtt PortalProfiles.Arn, !GetAtt DocumentsTable.Arn]
+      Events:
+        Session:
+          Type: Api
+          Properties:
+            RestApiId: !Ref PortalApi
+            Path: /session
+            Method: GET
+            Auth: {Authorizer: NONE}
+  AuthorizerLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${PortalAuthorizer}'
+      RetentionInDays: 14
+  DocumentLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${PortalDocuments}'
+      RetentionInDays: 14
+  SessionLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub '/aws/lambda/${PortalSession}'
+      RetentionInDays: 14
+
+Outputs:
+  ApiBaseUrl:
+    Value: !Sub 'https://${PortalApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/demo'
+  ProfilesTable:
+    Value: !Ref PortalProfiles
+  DocumentsTable:
+    Value: !Ref DocumentsTable
+  DocumentsBucket:
+    Value: !Ref DocumentsBucket
+  AuthorizerFunction:
+    Value: !Ref PortalAuthorizer
+  SessionFunction:
+    Value: !Ref PortalSession
+  DocumentsFunction:
+    Value: !Ref PortalDocuments
